@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', default='secret')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'localhost']
+ALLOWED_HOSTS = ['*', 'localhost', 'maratagliullin.pythonanywhere.com']
 
 
 # Application definition
