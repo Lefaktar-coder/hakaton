@@ -132,3 +132,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SWAGGER_SETTINGS = {
     "DEFAULT_MODEL_RENDERING": "example"
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
