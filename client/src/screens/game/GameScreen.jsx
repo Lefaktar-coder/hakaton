@@ -8,7 +8,7 @@ export const GameScreen = ({ onWhack, endGame, score, fears }) => {
   return (
     <>
       <button className="end-game" onClick={endGame}>
-        End game
+        Закончить игру
       </button>
       <Score value={score} />
       <Timer time={TIME_LIMIT} onEnd={endGame} />
