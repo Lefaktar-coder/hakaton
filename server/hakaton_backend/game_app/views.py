@@ -1,13 +1,15 @@
-from rest_framework import status
+from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import viewsets
 
-from .serializers import FearsSerializer, TestSerializer
-from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
+from .models import Fears, Ratings
+from .serializers import FearsSerializer, RatingsSerializer, TestSerializer
 
-from .models import Fears
+User = get_user_model()
 
 response_schema_dict = {
     "200": openapi.Response(
@@ -53,3 +55,38 @@ class FearsViewSet(viewsets.ModelViewSet):
     queryset = Fears.objects.all()
     serializer_class = FearsSerializer
     http_method_names = ['get',]
+    permission_classes = (permissions.AllowAny,)
+
+
+class RatingsViewSet(viewsets.ModelViewSet):
+    queryset = Ratings.objects.all()
+    serializer_class = RatingsSerializer
+    http_method_names = ['get', 'post']
+
+    def get_permissions(self):
+        if self.action == 'list':
+            permission_classes = [permissions.AllowAny]
+        if self.action == 'create':
+            permission_classes = [permissions.IsAuthenticated]
+        return [permission() for permission in permission_classes]
+
+    def create(self, request, *args, **kwargs):
+        serializer = RatingsSerializer(data=request.data)
+        response_data = {
+            'detail': 'success',
+        }
+
+        if serializer.is_valid():
+            user_request = request.data['username']
+            rating = request.data['rating']
+            user = get_object_or_404(User, username=user_request)
+            check_user_in_ratings = Ratings.objects.filter(
+                username=user).exists()
+
+            if not check_user_in_ratings:
+                Ratings.objects.create(rating=rating, username=user)
+                return Response(response_data, status=status.HTTP_200_OK)
+            else:
+                Ratings.objects.filter(username=user).update(rating=rating)
+                return Response(response_data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
