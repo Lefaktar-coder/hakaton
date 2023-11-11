@@ -1,0 +1,15 @@
+.startScreen__section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.startScreen__button-box {
+  display: flex;
+  gap: 30px;
+}
+
+.startScreen__text {
+  width: 60%;
+}

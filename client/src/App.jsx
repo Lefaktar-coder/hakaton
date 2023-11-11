@@ -1,12 +1,12 @@
-import './index.css'
-import { Start } from './screens/start'
+import "./index.css";
+import { StartScreen } from "./screens/StartScreen";
 
 function App() {
-	return (
-		<div className='wrapper'>
-			<Start />
-		</div>
-	)
+  return (
+    <div className="wrapper">
+      <StartScreen />
+    </div>
+  );
 }
 
-export default App
+export default App;
