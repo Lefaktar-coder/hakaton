@@ -1,10 +1,13 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import viewsets
 
-from .serializers import TestSerializer
+from .serializers import FearsSerializer, TestSerializer
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+
+from .models import Fears
 
 response_schema_dict = {
     "200": openapi.Response(
@@ -33,8 +36,7 @@ test_param = openapi.Parameter(
     type=openapi.TYPE_STRING)
 
 
-@swagger_auto_schema(operation_description="""Тестовый ендпоинт
-                     для проверки АПИ""",
+@swagger_auto_schema(operation_description="""Тестовый ендпоинт для проверки АПИ""",
                      method='post',
                      manual_parameters=[test_param],
                      responses=response_schema_dict)
@@ -45,3 +47,9 @@ def test_endpoint(request):
         if serializer.is_valid():
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class FearsViewSet(viewsets.ModelViewSet):
+    queryset = Fears.objects.all()
+    serializer_class = FearsSerializer
+    http_method_names = ['get',]

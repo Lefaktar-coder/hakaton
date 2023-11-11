@@ -1,10 +1,15 @@
-from django.urls import path
-from django.urls import re_path
+from django.urls import include, path
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 from .views import test_endpoint
+from rest_framework.routers import DefaultRouter
+from .views import FearsViewSet
+
+
+router = DefaultRouter()
+router.register('fears', FearsViewSet)
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -27,4 +32,5 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc',
                                        cache_timeout=0), name='schema-redoc'),
     path('test', test_endpoint, name='test_endpoint'),
+    path('', include(router.urls)),
 ]
