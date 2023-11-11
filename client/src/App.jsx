@@ -1,10 +1,10 @@
 import { useState } from "react";
-import "./index.css";
 import gsap from "gsap";
 import { StartScreen } from "./screens/start/StartScreen";
 import { GameScreen } from "./screens/game/GameScreen";
 import { FinalScreen } from "./screens/final/FinalScreen";
 import { FEAR_SCORE } from "./utils/constants";
+import "./index.css";
 
 const App = () => {
   const [finished, setFinished] = useState(false);
