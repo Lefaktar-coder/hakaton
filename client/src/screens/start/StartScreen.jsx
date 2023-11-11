@@ -1,11 +1,8 @@
+/* eslint-disable react/prop-types */
 import "./StartScreen.css";
 import { Button } from "../../components/buttons/Button";
 
-export const StartScreen = () => {
-  const handleStartClick = () => {
-    console.log("clicked");
-  };
-
+export const StartScreen = ({ handleButtonClick }) => {
   const handleRulesClick = () => {
     console.log("rules!!!");
   };
@@ -18,7 +15,7 @@ export const StartScreen = () => {
         Кликай мышкой по страхам, чтобы их поймать. У тебя есть 30 секунд!
       </p>
       <div className="startScreen__button-box">
-        <Button text="Начать!" handleButtonClick={() => handleStartClick()} />
+        <Button text="Начать" handleButtonClick={handleButtonClick} />
         <Button text="Правила" handleButtonClick={() => handleRulesClick()} />
       </div>
     </section>
