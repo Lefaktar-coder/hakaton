@@ -7,11 +7,11 @@ import './GameScreen.css'
 
 export const GameScreen = ({ onWhack, endGame, score, fears }) => {
 	return (
-		<div className='game-screen__wrapper'>
+		<>
 			<button
 				className='end-game'
 				onClick={endGame}>
-				End game
+				Закончить игру
 			</button>
 			<Score value={score} />
 			<Timer
@@ -21,7 +21,6 @@ export const GameScreen = ({ onWhack, endGame, score, fears }) => {
 			<Fears
 				fears={fears}
 				onWhack={onWhack}></Fears>
-		</div>
+		</>
 	)
 }
-
