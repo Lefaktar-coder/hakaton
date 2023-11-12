@@ -1,12 +1,10 @@
-
-import { useState } from "react";
-import gsap from "gsap";
-import { StartScreen } from "./screens/start/StartScreen";
-import { GameScreen } from "./screens/game/GameScreen";
-import { FinalScreen } from "./screens/final/FinalScreen";
-import { FEAR_SCORE } from "./utils/constants";
-import "./index.css";
-
+import gsap from 'gsap'
+import { useState } from 'react'
+import './index.css'
+import { FinalScreen } from './screens/final/FinalScreen'
+import { GameScreen } from './screens/game/GameScreen'
+import { StartScreen } from './screens/start/StartScreen'
+import { FEAR_SCORE } from './utils/constants'
 
 const App = () => {
 	const [finished, setFinished] = useState(false)
@@ -35,9 +33,7 @@ const App = () => {
 	const onWhack = points => setScore(prevScore => prevScore + points)
 
 	return (
-		<div className='wrapper'>
-			{/* <LoginForm /> */}
-			{/* {<StartScreen /> && <RegistrationForm />} */}
+		<div className={`wrapper ${!finished ? 'blur-background' : ''}`}>
 			{!playing && !finished && <StartScreen handleButtonClick={() => startGame()} />}
 			{playing && (
 				<GameScreen
