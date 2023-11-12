@@ -71,11 +71,15 @@ class RatingsViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
     def create(self, request, *args, **kwargs):
-        serializer = RatingsSerializer(data=request.data)
-        response_data = {
+
+        response_data_success = {
             'detail': 'success',
         }
+        response_data_error = {
+            "detail3": "Authentication credentials were not provided."
+        }
 
+        serializer = RatingsSerializer(data=request.data)
         if serializer.is_valid():
             user_request = request.data['username']
             rating = request.data['rating']
@@ -84,9 +88,17 @@ class RatingsViewSet(viewsets.ModelViewSet):
                 username=user).exists()
 
             if not check_user_in_ratings:
-                Ratings.objects.create(rating=rating, username=user)
-                return Response(response_data, status=status.HTTP_200_OK)
+                if user == self.request.user:
+                    Ratings.objects.create(
+                        rating=rating, username=self.request.user)
+                    return Response(response_data_success, status=status.HTTP_200_OK)
+                return Response(response_data_error,
+                                status=status.HTTP_400_BAD_REQUEST)
             else:
-                Ratings.objects.filter(username=user).update(rating=rating)
-                return Response(response_data, status=status.HTTP_200_OK)
+                if user == self.request.user:
+                    Ratings.objects.filter(
+                        username=self.request.user).update(rating=rating)
+                    return Response(response_data_success, status=status.HTTP_200_OK)
+                return Response(response_data_error,
+                                status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

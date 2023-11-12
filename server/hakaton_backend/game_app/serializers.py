@@ -1,10 +1,10 @@
-from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth import get_user_model
 from djoser.serializers import \
     UserCreateSerializer as DjoserUserCreateSerializer
-from djoser.serializers import UserSerializer
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
-
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import Fears, Ratings
 
 User = get_user_model()
@@ -39,3 +39,17 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
     def get_token(self, user):
         refresh = RefreshToken.for_user(user)
         return str(refresh.access_token)
+
+
+class TokenObtainSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        refresh = self.get_token(self.user)
+        del data['refresh']
+        del data['access']
+        data["token"] = str(refresh.access_token)
+        return data
+
+
+class CutomObtainPairView(TokenObtainPairView):
+    serializer_class = TokenObtainSerializer

@@ -3,6 +3,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from rest_framework.routers import DefaultRouter
+from .serializers import CutomObtainPairView
 
 from .views import FearsViewSet, RatingsViewSet, test_endpoint
 
@@ -35,4 +36,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
+    path('auth/login/', CutomObtainPairView.as_view(), name='customtoken'),
 ]
