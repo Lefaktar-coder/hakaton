@@ -48,6 +48,9 @@ class TokenObtainSerializer(TokenObtainPairSerializer):
         del data['refresh']
         del data['access']
         data["token"] = str(refresh.access_token)
+        data["username"] = str(self.user)
+        rating = Ratings.objects.get(username=self.user)
+        data["ratings"] = str(rating.rating)
         return data
 
 
