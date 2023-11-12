@@ -39,23 +39,3 @@
 	padding: 3px 7px;
 	font-weight: 300;
 }
-
-.form__button {
-	box-sizing: border-box;
-	position: relative;
-	display: inline-block;
-	cursor: pointer;
-	outline: none;
-	border: 0;
-	vertical-align: middle;
-	text-decoration: none;
-	font-size: inherit;
-	font-family: inherit;
-	font-weight: 600;
-	color: var(--text);
-	text-transform: uppercase;
-	padding: 7px 12px;
-	background-color: var(--pink);
-	border: 2px solid var(--pink-border);
-	border-radius: 0.75em;
-}

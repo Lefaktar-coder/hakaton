@@ -1,6 +1,11 @@
 import { useState } from 'react'
+import './RegistrationForm.css'
 
 const RegistrationForm = () => {
+	// eslint-disable-next-line no-unused-vars
+	const [token, setToken] = useState(null)
+	const [registrationStatus, setRegistrationStatus] = useState(null)
+
 	const [formData, setFormData] = useState({
 		username: '',
 		password: '',
@@ -20,8 +25,14 @@ const RegistrationForm = () => {
 	const handleSubmit = async e => {
 		e.preventDefault()
 
+		if (formData.password !== formData.confirmPassword) {
+			console.error('Пароли не совпадают')
+			setRegistrationStatus('passwordMismatch')
+			return
+		}
+
 		try {
-			const response = await fetch('http://maratagliullin.pythonanywhere.com/api/v1/auth/users/', {
+			const response = await fetch('https://maratagliullin.pythonanywhere.com/api/v1/auth/users/', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -32,27 +43,43 @@ const RegistrationForm = () => {
 			if (response.ok) {
 				console.log('Пользователь успешно зарегистрирован')
 
-				setFormData({
-					username: '',
-					password: '',
-					confirmPassword: '',
-				})
+				const data = await response.json()
+				const receivedToken = data.token
 
-				setShowModal(false)
+				if (receivedToken) {
+					console.log('Пользователь успешно зарегистрирован')
+					setToken(receivedToken)
+					setRegistrationStatus('success')
+					setShowModal(false)
+				} else {
+					console.error('Токен не получен от сервера')
+					setRegistrationStatus('error')
+				}
 			} else {
 				console.error('Ошибка при регистрации')
+				setRegistrationStatus('error')
 			}
 		} catch (error) {
 			console.error('Произошла ошибка:', error)
+			setRegistrationStatus('error')
+		}
+
+		{
+			registrationStatus === 'success' && <p>Регистрация успешна!</p>
+		}
+		{
+			registrationStatus === 'error' && <p>Произошла ошибка при регистрации</p>
 		}
 	}
 
 	return (
-		<div>
+		<div className='register__wrapper'>
 			{showModal && (
 				<div className='modal'>
-					<h2>Регистрация</h2>
-					<form onSubmit={handleSubmit}>
+					<h2 className='register__title'>Регистрация</h2>
+					<form
+						className='register__form'
+						onSubmit={handleSubmit}>
 						<label>
 							Логин:
 							<input
@@ -63,7 +90,6 @@ const RegistrationForm = () => {
 								required
 							/>
 						</label>
-						<br />
 
 						<label>
 							Пароль:
@@ -75,7 +101,6 @@ const RegistrationForm = () => {
 								required
 							/>
 						</label>
-						<br />
 
 						<label>
 							Подтвердите пароль:
@@ -87,10 +112,9 @@ const RegistrationForm = () => {
 								required
 							/>
 						</label>
-						<br />
 
 						<button
-							className='form__button'
+							className=' button'
 							type='submit'>
 							Зарегистрироваться
 						</button>

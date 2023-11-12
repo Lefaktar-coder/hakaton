@@ -22,11 +22,10 @@ const LoginForm = () => {
 
 		try {
 			const username = { username: e.target.value }
-			console.log(username)
-			const password = { password: e.target.value }
-			console.log(password)
 
-			const response = await fetch('http://maratagliullin.pythonanywhere.com/api/v1/test', {
+			const password = { password: e.target.value }
+
+			const response = await fetch('http://maratagliullin.pythonanywhere.com/api/v1/auth/login/', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -39,11 +38,11 @@ const LoginForm = () => {
 
 			if (response.ok) {
 				console.log('Вход выполнен успешно')
-				// Дополнительная логика после успешного входа
+				// TODO: добавить дополнительную логика после успешного входа
 			} else {
 				const errorData = await response.json()
 				console.error('Ошибка входа:', errorData || 'Нет данных об ошибке')
-				// Дополнительная логика в случае ошибки входа
+				//TODO: добавить дополнительную логика в случае ошибки входа
 			}
 		} catch (error) {
 			console.error('Произошла ошибка:', error)
@@ -80,7 +79,7 @@ const LoginForm = () => {
 				</label>
 
 				<button
-					className='form__button'
+					className='button'
 					type='submit'>
 					Войти
 				</button>
