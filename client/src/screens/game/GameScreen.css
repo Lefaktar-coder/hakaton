@@ -1,0 +1,66 @@
+.game-screen__wrapper {
+  font-family: "Rubik", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg);
+  padding: 40px;
+  border-radius: 30px;
+  width: 500px;
+  height: 500px;
+}
+
+.end-game {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 7px 15px;
+}
+
+.fears {
+  /* border-bottom: 1px solid #000;
+  background-color: #eee;
+  height: 25px; */
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  align-items: center;
+}
+
+.fear-hole {
+  width: 100px;
+  height: 100px;
+  background-color: #87ceeb;
+  overflow: hidden;
+  margin-top: auto;
+  border-radius: 10px;
+}
+
+.fear {
+  display: none;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  place-items: center; */
+  margin: 0 auto;
+  text-align: center;
+  font-size: 48px;
+  border-radius: 35px;
+  background: transparent;
+  border: none;
+}
+
+.game-screen__info-box {
+  margin: 20px auto;
+}
+
+.game-screen__info {
+  text-align: center;
+}

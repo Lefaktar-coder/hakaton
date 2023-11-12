@@ -1,0 +1,22 @@
+.legend {
+  padding: 30px;
+}
+
+.legend__title {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.legend__subtitle {
+  margin-bottom: 30px;
+}
+
+.legend__text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.legend__icon {
+  font-size: 24px;
+}

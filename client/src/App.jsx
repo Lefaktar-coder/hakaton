@@ -1,42 +1,55 @@
+import gsap from 'gsap'
 import { useState } from 'react'
-import './App.css'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import './index.css'
+import { FinalScreen } from './screens/final/FinalScreen'
+import { GameScreen } from './screens/game/GameScreen'
+import { StartScreen } from './screens/start/StartScreen'
+import { FEAR_SCORE } from './utils/constants'
 
-function App() {
-	const [count, setCount] = useState(0)
+const App = () => {
+	const [finished, setFinished] = useState(false)
+	const [playing, setPlaying] = useState(false)
+	const [score, setScore] = useState(0)
+	const generateFears = () =>
+		new Array(9).fill(0).map(() => ({
+			speed: gsap.utils.random(0.5, 1),
+			delay: gsap.utils.random(0.5, 4),
+			points: FEAR_SCORE,
+		}))
+	const [fears, setFears] = useState(generateFears())
+
+	const startGame = () => {
+		setScore(0)
+		setFears(generateFears())
+		setPlaying(true)
+		setFinished(false)
+	}
+
+	const endGame = () => {
+		setPlaying(false)
+		setFinished(true)
+	}
+
+	const onWhack = points => setScore(prevScore => prevScore + points)
 
 	return (
-		<>
-			<div>
-				<a
-					href='https://vitejs.dev'
-					target='_blank'>
-					<img
-						src={viteLogo}
-						className='logo'
-						alt='Vite logo'
-					/>
-				</a>
-				<a
-					href='https://react.dev'
-					target='_blank'>
-					<img
-						src={reactLogo}
-						className='logo react'
-						alt='React logo'
-					/>
-				</a>
-			</div>
-			<h1>Hello World!</h1>
-			<div className='card'>
-				<button onClick={() => setCount(count => count + 1)}>count is {count}</button>
-				<p>
-					Edit <code>src/App.jsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-		</>
+		<div className={`wrapper ${!finished ? 'blur-background' : ''}`}>
+			{!playing && !finished && <StartScreen handleButtonClick={() => startGame()} />}
+			{playing && (
+				<GameScreen
+					onWhack={onWhack}
+					endGame={endGame}
+					score={score}
+					fears={fears}
+				/>
+			)}
+			{finished && (
+				<FinalScreen
+					score={score}
+					startGame={startGame}
+				/>
+			)}
+		</div>
 	)
 }
 
