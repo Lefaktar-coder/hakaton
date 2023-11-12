@@ -24,3 +24,4 @@ export const GameScreen = ({ onWhack, endGame, score, fears }) => {
 		</div>
 	)
 }
+
