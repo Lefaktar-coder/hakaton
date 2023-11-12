@@ -1,7 +1,0 @@
-Django==4.1
-requests==2.31.0
-djangorestframework==3.13.1
-django-cors-headers==4.3.0
-drf-yasg==1.21.5
-Pillow==10.1.0
-sorl-thumbnail==12.10.0
