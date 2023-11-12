@@ -49,8 +49,11 @@ class TokenObtainSerializer(TokenObtainPairSerializer):
         del data['access']
         data["token"] = str(refresh.access_token)
         data["username"] = str(self.user)
-        rating = Ratings.objects.get(username=self.user)
-        data["ratings"] = str(rating.rating)
+        rating = Ratings.objects.filter(username=self.user)
+        if rating.exists():
+            data["rating"] = str(rating.values('rating')[0]['rating'])
+        else:
+            data["rating"] = 0
         return data
 
 
