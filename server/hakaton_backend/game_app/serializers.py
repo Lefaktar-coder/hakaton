@@ -32,13 +32,17 @@ class RatingsSerializer(serializers.ModelSerializer):
 
 class UserCreateSerializer(DjoserUserCreateSerializer):
     token = serializers.SerializerMethodField(method_name='get_token')
+    rating = serializers.SerializerMethodField(method_name='get_rating')
 
     class Meta(DjoserUserCreateSerializer.Meta):
-        fields = ['id', 'username', 'token', 'password']
+        fields = ['id', 'username', 'token', 'password', 'rating']
 
     def get_token(self, user):
         refresh = RefreshToken.for_user(user)
         return str(refresh.access_token)
+
+    def get_rating(self, user):
+        return 0
 
 
 class TokenObtainSerializer(TokenObtainPairSerializer):
