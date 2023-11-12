@@ -11,7 +11,7 @@ const App = () => {
 	const [playing, setPlaying] = useState(false)
 	const [score, setScore] = useState(0)
 	const generateFears = () =>
-		new Array(5).fill(0).map(() => ({
+		new Array(9).fill(0).map(() => ({
 			speed: gsap.utils.random(0.5, 1),
 			delay: gsap.utils.random(0.5, 4),
 			points: FEAR_SCORE,
