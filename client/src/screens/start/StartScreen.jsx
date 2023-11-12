@@ -25,10 +25,11 @@ export const StartScreen = ({ handleButtonClick }) => {
 
   return (
     <section className="startScreen__section">
-      <h1 className="startScreen__title">Ловец страхов 🏹</h1>
+      <h1 className="startScreen__title">Ловец эмоджи-страхов 🏹</h1>
       <p className="startScreen__text">
         {" "}
-        Кликай мышкой по страхам, чтобы их поймать. У тебя есть 30 секунд!
+        Кликай мышкой по эмоджи - это страхи, которые нужно поймать. У тебя есть
+        30 секунд!
       </p>
       <div className="startScreen__button-box">
         <Button text="Играть" handleButtonClick={handleButtonClick} />
