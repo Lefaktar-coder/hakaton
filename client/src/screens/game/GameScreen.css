@@ -1,39 +1,56 @@
 .game-screen__wrapper {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 10px;
-	background: var(--bg);
-	padding: 40px;
-	border-radius: 30px;
-	width: 350px;
-	height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg);
+  padding: 40px;
+  border-radius: 30px;
+  width: 350px;
+  height: 350px;
 }
 
 .end-game {
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 15px;
-	font-family: 'Rubik', sans-serif;
-	font-weight: 500;
-	font-size: 16px;
-	padding: 7px 15px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 7px 15px;
 }
 
 .fears {
-	border-bottom: 1px solid #000;
-	background-color: #eee;
-	height: 25px;
+  /* border-bottom: 1px solid #000;
+  background-color: #eee;
+  height: 25px; */
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  align-items: center;
+}
+
+.fear-hole {
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  overflow: hidden;
+  margin-top: auto;
 }
 
 .fear {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	place-items: center;
-	width: 35px;
-	height: 35px;
-	border-radius: 35px;
+  display: none;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  place-items: center; */
+  margin: 0 auto;
+  text-align: center;
+  font-size: 48px;
+  border-radius: 35px;
+  background: transparent;
+  border: none;
 }
