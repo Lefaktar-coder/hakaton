@@ -18,7 +18,11 @@ const Timer = ({ time, interval = 1000, onEnd }) => {
     return () => clearTimeout(timerRef.current);
   }, [interval]);
 
-  return <span className="info-text">{`Time: ${internalTime / 1000}s`}</span>;
+  return (
+    <span className="game-screen__info">{`Осталось времени: ${
+      internalTime / 1000
+    } сек.`}</span>
+  );
 };
 
 export default Timer;
