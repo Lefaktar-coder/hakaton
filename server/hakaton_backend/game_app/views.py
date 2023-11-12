@@ -76,7 +76,7 @@ class RatingsViewSet(viewsets.ModelViewSet):
             'detail': 'success',
         }
         response_data_error = {
-            "detail3": "Authentication credentials were not provided."
+            "detail": "Authentication credentials were not provided."
         }
 
         serializer = RatingsSerializer(data=request.data)
