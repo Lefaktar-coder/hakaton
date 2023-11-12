@@ -5,7 +5,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from django.db.models import F
 from .models import Fears, Ratings
 from .serializers import FearsSerializer, RatingsSerializer, TestSerializer
 
@@ -96,8 +96,9 @@ class RatingsViewSet(viewsets.ModelViewSet):
                                 status=status.HTTP_400_BAD_REQUEST)
             else:
                 if user == self.request.user:
+
                     Ratings.objects.filter(
-                        username=self.request.user).update(rating=rating)
+                        username=self.request.user).update(rating=F('rating') + rating)
                     return Response(response_data_success, status=status.HTTP_200_OK)
                 return Response(response_data_error,
                                 status=status.HTTP_400_BAD_REQUEST)
