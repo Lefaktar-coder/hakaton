@@ -59,7 +59,7 @@ class FearsViewSet(viewsets.ModelViewSet):
 
 
 class RatingsViewSet(viewsets.ModelViewSet):
-    queryset = Ratings.objects.all()
+    queryset = Ratings.objects.all().order_by('-rating')
     serializer_class = RatingsSerializer
     http_method_names = ['get', 'post']
 
