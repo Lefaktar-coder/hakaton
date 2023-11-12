@@ -1,3 +1,7 @@
+.legend {
+  padding: 30px;
+}
+
 .legend__title {
   font-size: 24px;
   margin-bottom: 30px;

@@ -31,7 +31,7 @@ export const StartScreen = ({ handleButtonClick }) => {
         Кликай мышкой по страхам, чтобы их поймать. У тебя есть 30 секунд!
       </p>
       <div className="startScreen__button-box">
-        <Button text="Начать" handleButtonClick={handleButtonClick} />
+        <Button text="Играть" handleButtonClick={handleButtonClick} />
         <Button text="Правила" handleButtonClick={() => handleRulesClick()} />
         <Button text="Страхи" handleButtonClick={() => handleLegendClick()} />
 
