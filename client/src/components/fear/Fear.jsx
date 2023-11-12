@@ -22,15 +22,16 @@ const Fear = ({ points, delay, speed, onWhack, pointsMin = 10 }) => {
 			onWhack(pointsRef.current)
 
 			gsap.to(buttonRef.current, {
-				scale: 3.5,
+				scale: 2.3,
 				opacity: 0,
+				y: -100,
 				duration: 0.5,
 				onComplete: () => {
 					setWhacked(false)
 					setEmoji(getRandomEmoji())
 					pointsRef.current = points
 					bobRef.current?.restart()
-					gsap.set(buttonRef.current, { scale: 1, opacity: 1 })
+					gsap.set(buttonRef.current, { y: 0, scale: 1, opacity: 1 })
 				},
 			})
 		}
@@ -62,24 +63,6 @@ const Fear = ({ points, delay, speed, onWhack, pointsMin = 10 }) => {
 			bobRef.current?.kill()
 		}
 	}, [delay, speed, pointsMin])
-
-	useEffect(() => {
-		if (whacked) {
-			pointsRef.current = points
-			bobRef.current.pause()
-			gsap.to(buttonRef.current, {
-				yPercent: 300,
-				duration: 0.1,
-				onComplete: () => {
-					gsap.delayedCall(gsap.utils.random(1, 3), () => {
-						setWhacked(false)
-						setEmoji(getRandomEmoji())
-						bobRef.current?.restart()
-					})
-				},
-			})
-		}
-	}, [whacked])
 
 	return (
 		<div className='fear-hole'>
