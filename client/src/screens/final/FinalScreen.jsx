@@ -7,7 +7,7 @@ import confetti from "canvas-confetti";
 
 export const FinalScreen = ({ score, startGame }) => {
   useEffect(() => {
-    if (score > 300) {
+    if (score > 50) {
       const timeoutId = setTimeout(() => {
         confetti({
           particleCount: 300,

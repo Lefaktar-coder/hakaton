@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
-const Score = ({ value }) => (
-  <div className="info-text">{`Score: ${value}`}</div>
-);
+import './Score.css'
 
-export default Score;
+const Score = ({ value }) => <div className='info-text'>{`Score: ${value}`}</div>
+
+export default Score
