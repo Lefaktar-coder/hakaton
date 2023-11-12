@@ -1,0 +1,15 @@
+.rules__title {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.rules__text {
+  list-style-type: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rules {
+  padding: 30px;
+}
