@@ -1,10 +1,19 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import "./StartScreen.css";
 import { Button } from "../../components/buttons/Button";
+import { Modal } from "../../components/modal/Modal";
+import { Rules } from "../../components/rules/Rules";
 
 export const StartScreen = ({ handleButtonClick }) => {
+  const [isRulesModalOpen, setRulesModalOpen] = useState(false);
+
   const handleRulesClick = () => {
-    console.log("rules!!!");
+    setRulesModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setRulesModalOpen(false);
   };
 
   return (
@@ -17,6 +26,10 @@ export const StartScreen = ({ handleButtonClick }) => {
       <div className="startScreen__button-box">
         <Button text="Начать" handleButtonClick={handleButtonClick} />
         <Button text="Правила" handleButtonClick={() => handleRulesClick()} />
+
+        <Modal isOpen={isRulesModalOpen} onRequestClose={closeModal}>
+          <Rules />
+        </Modal>
       </div>
     </section>
   );

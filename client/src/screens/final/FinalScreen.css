@@ -1,0 +1,13 @@
+.finalScreen__section {
+  font-family: "Rubik", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  background: var(--bg);
+  padding: 40px;
+  border-radius: 30px;
+  width: 350px;
+  height: 350px;
+}
