@@ -44,11 +44,8 @@ Cоздать `.env` файл в переменных среды окружен�
 `python manage.py runserver`  
 
 ##### Документация:
-`http://localhost:8000/api/v1/swagger/`  
-
-##### Тестовый эндпоинт для проверки взаимодействия
-`http://localhost:8000/api/v1/test`  
+`https://maratagliullin.pythonanywhere.com/api/v1/swagger/`  
 
 ##### Административный интерфейс Django
-`http://localhost:8000/admin`  
+`https://maratagliullin.pythonanywhere.com/admin`  
 
