@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'sorl.thumbnail',
-    'djoser'
+    'djoser',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist'
 ]
 
 MIDDLEWARE = [

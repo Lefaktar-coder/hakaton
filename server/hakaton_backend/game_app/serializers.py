@@ -48,10 +48,7 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
 class TokenObtainSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-        refresh = self.get_token(self.user)
-        del data['refresh']
-        del data['access']
-        data["token"] = str(refresh.access_token)
+        data['token'] = data.pop('access')
         data["username"] = str(self.user)
         rating = Ratings.objects.filter(username=self.user)
         if rating.exists():

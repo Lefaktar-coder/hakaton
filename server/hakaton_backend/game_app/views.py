@@ -91,14 +91,21 @@ class RatingsViewSet(viewsets.ModelViewSet):
                 if user == self.request.user:
                     Ratings.objects.create(
                         rating=rating, username=self.request.user)
+                    updated_instance = Ratings.objects.get(
+                        username=self.request.user)
+                    updated_value = updated_instance.rating
+                    response_data_success['rating'] = updated_value
                     return Response(response_data_success, status=status.HTTP_200_OK)
                 return Response(response_data_error,
                                 status=status.HTTP_400_BAD_REQUEST)
             else:
                 if user == self.request.user:
-
-                    Ratings.objects.filter(
+                    rating = Ratings.objects.filter(
                         username=self.request.user).update(rating=F('rating') + rating)
+                    updated_instance = Ratings.objects.get(
+                        username=self.request.user)
+                    updated_value = updated_instance.rating
+                    response_data_success['rating'] = updated_value
                     return Response(response_data_success, status=status.HTTP_200_OK)
                 return Response(response_data_error,
                                 status=status.HTTP_400_BAD_REQUEST)
