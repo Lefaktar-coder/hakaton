@@ -12,8 +12,6 @@ const RegistrationForm = () => {
 		confirmPassword: '',
 	})
 
-	const [showModal, setShowModal] = useState(true)
-
 	const handleChange = e => {
 		const { name, value } = e.target
 		setFormData({
@@ -25,14 +23,8 @@ const RegistrationForm = () => {
 	const handleSubmit = async e => {
 		e.preventDefault()
 
-		if (formData.password !== formData.confirmPassword) {
-			console.error('Пароли не совпадают')
-			setRegistrationStatus('passwordMismatch')
-			return
-		}
-
 		try {
-			const response = await fetch('https://maratagliullin.pythonanywhere.com/api/v1/auth/users/', {
+			const response = await fetch('https://process.env.SERVER_URL/api/v1/auth/users/', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -50,7 +42,6 @@ const RegistrationForm = () => {
 					console.log('Пользователь успешно зарегистрирован')
 					setToken(receivedToken)
 					setRegistrationStatus('success')
-					setShowModal(false)
 				} else {
 					console.error('Токен не получен от сервера')
 					setRegistrationStatus('error')
@@ -74,53 +65,47 @@ const RegistrationForm = () => {
 
 	return (
 		<div className='register__wrapper'>
-			{showModal && (
-				<div className='modal'>
-					<h2 className='register__title'>Регистрация</h2>
-					<form
-						className='register__form'
-						onSubmit={handleSubmit}>
-						<label>
-							Логин:
-							<input
-								type='text'
-								name='username'
-								value={formData.username}
-								onChange={handleChange}
-								required
-							/>
-						</label>
+			<form
+				className='register__form'
+				onSubmit={handleSubmit}>
+				<h2 className='register__title'>Регистрация</h2>
 
-						<label>
-							Пароль:
-							<input
-								type='password'
-								name='password'
-								value={formData.password}
-								onChange={handleChange}
-								required
-							/>
-						</label>
+				<div className='register__labels'>
+					<label>
+						Логин:
+						<input
+							type='text'
+							name='username'
+							value={formData.username}
+							onChange={handleChange}
+							required
+						/>
+					</label>
 
-						<label>
-							Подтвердите пароль:
-							<input
-								type='password'
-								name='confirmPassword'
-								value={formData.confirmPassword}
-								onChange={handleChange}
-								required
-							/>
-						</label>
-
-						<button
-							className=' button'
-							type='submit'>
-							Зарегистрироваться
-						</button>
-					</form>
+					<label>
+						Пароль:
+						<input
+							type='password'
+							name='password'
+							value={formData.password}
+							onChange={handleChange}
+							required
+						/>
+					</label>
 				</div>
-			)}
+
+				<button
+					className='register__button button'
+					type='submit'>
+					Зарегистрироваться
+				</button>
+			</form>
+
+			<a
+				className='register__link'
+				href='/'>
+				Уже зарегистрированы?
+			</a>
 		</div>
 	)
 }

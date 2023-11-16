@@ -1,12 +1,11 @@
-import gsap from 'gsap'
+import { gsap } from 'gsap'
 import { useState } from 'react'
-import './index.css'
-import { FinalScreen } from './screens/final/FinalScreen'
-import { GameScreen } from './screens/game/GameScreen'
-import { StartScreen } from './screens/start/StartScreen'
-import { FEAR_SCORE } from './utils/constants'
+import { FEAR_SCORE } from '../../utils/constants'
+import { FinalScreen } from '../final/FinalScreen'
+import { GameScreen } from '../game/GameScreen'
+import { StartScreen } from '../start/StartScreen'
 
-const App = () => {
+const MainContent = () => {
 	const [finished, setFinished] = useState(false)
 	const [playing, setPlaying] = useState(false)
 	const [score, setScore] = useState(0)
@@ -53,4 +52,4 @@ const App = () => {
 	)
 }
 
-export default App
+export default MainContent

@@ -1,10 +1,40 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './index.css'
+import Contact from './pages/Contact'
+import Home from './pages/Home'
+import Layout from './pages/Layout'
+import NoPage from './pages/NoPage'
+import LeaderBoard from './pages/Score'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+export default function App() {
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route
+					path='/'
+					element={<Layout />}>
+					<Route
+						index
+						element={<Home />}
+					/>
+					<Route
+						path='score'
+						element={<LeaderBoard />}
+					/>
+					<Route
+						path='contact'
+						element={<Contact />}
+					/>
+					<Route
+						path='*'
+						element={<NoPage />}
+					/>
+				</Route>
+			</Routes>
+		</BrowserRouter>
+	)
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(<App />)
